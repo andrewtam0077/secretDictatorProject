@@ -46,7 +46,12 @@ body {
 .important_txt {
   font-size: 2rem;
 }
-
+.red_txt {
+  color: var(--red)
+}
+.white_txt {
+  color: white;
+}
 .envelope_tilt {
   transform: rotate(14.5deg);
 }
@@ -62,14 +67,19 @@ body {
   left: 0;
 }
 
-#instructions {
-  
+.playercard {
+  background-image: url('../images/player_gray.png'); 
+  display: table; 
+  text-align: center; 
+  margin: 0.2rem 3rem;
 }
 
 .fitImg {
   background-size: cover;
   background-position: center;
   position: relative;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
 }
 .titlebutton{
   color: white;
@@ -88,6 +98,10 @@ body {
 .phonepadding {
   display: none;
 }
+
+#playercol {
+  height: 500px;
+}
 @media only screen and (max-width: 768px) {
   .phonepadding {
     display: block;
@@ -98,5 +112,7 @@ body {
   .important_txt {
     font-size: 1.5rem;
   }
-
+  #playercol {
+    height: 300px;
+  }
 }

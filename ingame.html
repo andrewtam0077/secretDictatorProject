@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <script src="js/buttons.js"></script>
+        <script src="js/fitPlayers.js"></script>
 
         <!-- Document Styling -->
         <style>
@@ -45,14 +46,98 @@
                         </p>
                     </div>
                     <div class="col-md-3 col-lg-3 col-sm-3">
-                        <div style="background-color: var(--red); border-radius: 20px; text-align: center;">
-                            <p class="important_txt" style="color: white">
-                                Leave Game
-                            </p>
-                        </div>
+                        <button class="btn btn-default d-flex" style="float: right;" onclick=" goHome() ">
+                            <img id="hostGame" class="imgfit" src="images/leaveGame.png" style="width:90%; height:90%;">
+                        </button>
                     </div>
                 </div>
             </div>
         </header>
+        <div class="container">
+            <div class="row">
+                <!-- Player Names -->
+                <table id="playertable" class="col-lg-2 col-md-2 col-sm-3 " style="padding: 0;" cellspacing="0">
+                    <thead>
+                        <tr style="padding: 0; margin: 0;">
+                            <td style="padding: 0; margin: 0;">
+                                <div id="player1" class="playercard fitImg" style="background-image: url('images/player_orange.png'); margin: 0; padding: 0; height: 150px; width: 150px;">
+                                    <p class="white_txt" style="display: table-cell; vertical-align: middle;">You</p>
+                                </div>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="player2" class="playercard fitImg" style="margin: 0; padding: 0; height: 150px; width: 150px;">
+                                    <p class="white_txt" style="display: table-cell; vertical-align: middle;">sample 1</p>
+                                </div>
+                            </td>
+                            <td>
+                                <input type="button" value=" X " onclick="delRow()">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="player3" class="playercard fitImg" style="margin: 0; padding: 0; height: 150px; width: 150px;">
+                                    <p class="white_txt" style="display: table-cell; vertical-align: middle;">sample 2</p>
+                                </div>
+                            </td>
+                            <td>
+                                <input type="button" value=" X " onclick="delRow()">
+                            </td>
+                        </tr><tr>
+                            <td>
+                                <div id="player4" class="playercard fitImg" style="margin: 0; padding: 0; height: 150px; width: 150px;">
+                                    <p class="white_txt" style="display: table-cell; vertical-align: middle;">sample 3</p>
+                                </div>
+                            </td>
+                            <td>
+                                <input type="button" value=" X " onclick="delRow()">
+                            </td>
+                        </tr><tr>
+                            <td>
+                                <div id="player5" class="playercard fitImg" style="margin: 0; padding: 0; height: 150px; width: 150px;">
+                                    <p class="white_txt" style="display: table-cell; vertical-align: middle;">sample 4</p>
+                                </div>
+                            </td>
+                            <td>
+                                <input type="button" value=" X " onclick="delRow()">
+                            </td>
+                        </tr>
+                    </thead>                    
+                </table>
+                <script>
+                    var i = 0;
+                    while(i < 5) {
+                        i++;
+                        document.getElementById("player" + i).onmouseover = function () {tableRef.clickedRowIndex = this.rowIndex; alert("this.rowIndex");};
+                    }
+                    tableRef.clickedRowIndex = 4;
+                </script>
+                <div class="col-lg-1 col-md-1 col-sm-0"></div>
+                <!-- Game Boards -->
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <img class="absolutepos" src="images/libBoard.png" style="top: 0; left: 0; width: 75%;" >
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <img class="absolutepos" src="images/fascBoard.png" style="top: 0; left: 0; width: 75%;" >
+                </div>
+                <!-- Text Chat -->
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <form name="mainform" >
+                        <div class="form-group">
+                          <input type="text" id="addplayername" placeholder = "Add Player" class="form-control" name="name" />
+                        </div>
+                        <input type="button" class="btn btn-dark" id="add" value="Add Player" onclick="addStuff()"/> 
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
