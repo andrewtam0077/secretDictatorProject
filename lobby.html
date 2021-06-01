@@ -17,15 +17,15 @@
         <!-- Document Styling -->
         <style>
             .rectangle {
-                height: 100px;
-                width: 200px;
-                background-color: #555;
-                margin: 20px;
-                padding: 0px;
+                height: 150px;
+                width: 250px;
+                background-color:coral;
+                margin: 40x;
+                padding: 20px;
             }
             body {
-                background-image: url('images/background.png');
-                /* background-color:coral ; */
+                /* background-image: url('images/background.png'); */
+                background-color:coral ; 
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
                 margin: 0;
@@ -36,59 +36,62 @@
     <body>
         
         <div class="container">
+            <!-- header row -->
             <div class="row">
-                <div class="col-md-2" style="color:black;font-size:125%;font-family:text-align:left;"><b>Group Code:</b> 2342</div>
-                <div class="col-md-8" style="color:black;font-size:300%;text-align:center;"> <B>Lobby</B> </div> 
-                <div class="col-md-2"> 
-                    <button class="btn btn-default d-flex" style="text-align: right;">
-                        <img id="hostGame" class="imgfit" src="images/hostGame.png" style="width:150%; height:150%">
+                <div class="col-md-4" style="color:black;font-size:125%;text-align:left;"><B>Group Code:</B> 2342</div>
+                <div class="col-md-5" style="color:black;font-size:300%;text-align:center;"> <B>Lobby</B> </div> 
+                <!-- Leave button -->
+                <div class="col-md-3"> 
+                    <button class="btn btn-default d-flex" style="float: right;" onclick=" goHome() ">
+                        <img id="hostGame" class="imgfit" src="images/leaveGame.png" style="width:90%; height:90%;">
                     </button>
                 </div>
             </div>
             <!-- Row for Slots-->
             <div class="row">
                 <!-- First Row of Players-->
-                <div class="col-md-4">
-                    <div class="rectangle"></div>
+                <!-- First row will use the host icon -->
+                <div class="col-md-3">
+                    <div class="rectangle"> <img id="waiting1" class="imgfit" src="images/hostIcon.png" style="width:120%; height:120%"> </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="rectangle"></div>
-                </div>
-            </div>
-            <div class="row">
-                <!-- First Row of Players-->
-                <div class="col-md-4">
-                    <div class="rectangle"></div>
-                </div>
-                <div class="col-md-4">
-                    <div class="rectangle"></div>
+                <div class="col-md-3">
+                    <div class="rectangle"> <img id="waiting1" class="imgfit" src="images/waitingIcon.png" style="width:120%; height:120%"> </div>
                 </div>
             </div>
             <div class="row">
-                <!-- First Row of Players-->
-                <div class="col-md-4">
-                    <div class="rectangle"></div>
+                <!-- Second Row of Players-->
+                <div class="col-md-3">
+                    <div class="rectangle"> <img id="waiting1" class="imgfit" src="images/waitingIcon.png" style="width:120%; height:120%"> </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="rectangle"></div>
-                </div>
-            </div>
-            <div class="row">
-                <!-- First Row of Players-->
-                <div class="col-md-4">
-                    <div class="rectangle"></div>
-                </div>
-                <div class="col-md-4">
-                    <div class="rectangle"></div>
+                <div class="col-md-3">
+                    <div class="rectangle"> <img id="waiting1" class="imgfit" src="images/waitingIcon.png" style="width:120%; height:120%"> </div>
                 </div>
             </div>
             <div class="row">
-                <!-- First Row of Players-->
-                <div class="col-md-4">
-                    <div class="rectangle"></div>
+                <!-- Third Row of Players-->
+                <div class="col-md-3">
+                    <div class="rectangle"> <img id="waiting1" class="imgfit" src="images/waitingIcon.png" style="width:120%; height:120%"> </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="rectangle"></div>
+                <div class="col-md-3">
+                    <div class="rectangle"> <img id="waiting1" class="imgfit" src="images/waitingIcon.png" style="width:120%; height:120%"> </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Fourth Row of Players-->
+                <div class="col-md-3">
+                    <div class="rectangle"> <img id="waiting1" class="imgfit" src="images/waitingIcon.png" style="width:120%; height:120%"> </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="rectangle"> <img id="waiting1" class="imgfit" src="images/waitingIcon.png" style="width:120%; height:120%"> </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Fifth row of Players-->
+                <div class="col-md-3">
+                    <div class="rectangle"> <img id="waiting1" class="imgfit" src="images/waitingIcon.png" style="width:120%; height:120%"> </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="rectangle"> <img id="waiting1" class="imgfit" src="images/waitingIcon.png" style="width:120%; height:120%"> </div>
                 </div>
             </div>
 

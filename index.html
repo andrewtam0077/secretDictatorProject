@@ -96,6 +96,9 @@
 
 
         <script>
+            //make buttons go to destination when clicked 
+            document.getElementById("hostGame").addEventListener("click", function() {goLobby();}, false);
+            document.getElementById("joinGame").addEventListener("click", function() {goLobby();}, false);
             //make buttons expand when hovered over
             var growth = 1.05;
             document.getElementById("hostGame").addEventListener("mouseover", function() {grow("hostGame", growth);}, false);
