@@ -33,15 +33,21 @@
         <!-- Envelope and Username -->
         <img class = "absolutepos envelope_group" src="images/envelope.png" style="height:100%; top: 0; left: 0; z-index: -1;">
         <p class="absolutepos important_txt envelope_tilt envelope_group" style="top: 20%; left: 2%;">
-            Welcome
+            <B>Welcome, Please Sign In</B>
         </p>
-        <p class="absolutepos important_txt envelope_tilt envelope_group" style="top: 25%; left: 1.5%;">
-            Username
+        <!-- Added the username,password inputs and submit login button -->
+        <!-- need to incorporate POST -->
+        <p class="absolutepos important_txt envelope_tilt envelope_group" style="top: 30%; left: 1.5%;">
+                <input type="username" placeholder="Enter Username" name="user" required style="height:50%;width:75%;">
+                <br/>
+                <input type="password" placeholder="Enter password" name="pwd" required style="height:50%;width:75%;">
+                <br/>
+                <button type="submit" id="loginButton">Login</button>    
+                <br/>  
+                <p class="absolutepos important_txt envelope_tilt envelope_group" style="top:50%; left: 1.5%;color: black;font-size: small;" id="ErrorMes"><B></B></p>
         </p>
-        <u class="absolutepos important_txt envelope_tilt envelope_group" style="top: 35%; left: 1.2%; color: var(--brown); font-size: 1.5rem;">
-            log out
-        </u>
 
+        
 
         <div class="container">
             <!-- Title Logo -->
@@ -94,8 +100,14 @@
             </p>
         </div>
 
-
+        
         <script>
+            let error;
+            error = () => {
+                document.getElementById("ErrorMes").innerHTML = "Error, Unsuccessful Login.";
+            }
+            document.getElementById("loginButton").addEventListener("click", error);
+            //arrow function to output error since login hasn't been incoporated
             //make buttons go to destination when clicked 
             document.getElementById("hostGame").addEventListener("click", function() {goLobby();}, false);
             document.getElementById("joinGame").addEventListener("click", function() {goLobby();}, false);
