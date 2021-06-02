@@ -39,6 +39,17 @@ table {
   width: 100%;
 }  
 
+.logininput {
+  height:50%;
+  width:75%;
+  border-radius: 10px; 
+  opacity: 0.8;
+  margin-bottom: 2%;
+}
+.logininput:focus {
+  opacity: 1;
+}
+
 .fixedImg, .fixedTxt {
   position: absolute;
 }
@@ -61,7 +72,7 @@ table {
   color: white;
 }
 .envelope_tilt {
-  transform: rotate(14.5deg);
+  transform: rotate(15deg);
 }
 
 .title_info {
