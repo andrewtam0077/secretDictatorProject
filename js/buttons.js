@@ -27,14 +27,14 @@ function makeVisible(id) {
 
 function goHome() {
     if(confirm("Are you sure you want to leave?") == true) {
-        location.href = "index.html";
+        location.href = "index.php";
     }
 }
 function goLobby() {
-    location.href = "lobby.html";
+    location.href = "lobby.php";
 }
 function goGame() {
-    location.href = "ingame.html";
+    location.href = "ingame.php";
 }
 
 function sendText(playername) {
