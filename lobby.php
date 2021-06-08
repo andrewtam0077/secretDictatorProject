@@ -3,7 +3,7 @@
         <!-- Meta data -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="Henry Alcaine & Andrew Tam" content="define author of the page -- your name">
         <meta name="description" content="define a description of this page">
         <meta name="keywords" content="define keywords for search engines">
@@ -39,11 +39,11 @@
         <div class="row">
             <div class="col-md-2" style="color:black;font-size:150%;text-align:left;"><B>Group Code: </B></div>
             <div class="col-md-2" style="color:white;font-size:200%;text-align:left;"><B>2342 </B></div>
-            <div class="col-md-4" style="color:black;font-size:300%;text-align:center;"> <B>Lobby</B> </div> 
+            <div class="col-md-4" style="color:black;font-size:300%;text-align:center;"> <B>Lobby</B> </div>
             <!-- join game button -->
             <div class="col-md-2"> 
                 <button class="btn btn-default d-flex" style="float: right;" onclick=" goGame() ">
-                    <img id="hostGame" class="imgfit" src="images/startGame.png" style="width:90%; height:90%;"> <!-- Change image from leavegame to join game-->
+                    <img id="hostGame" class="imgfit" src="images/startGame.png" style="width:90%; height:90%;"><!-- Change image from leavegame to join game-->
                 </button>
             </div>
             <!-- Leave button -->
@@ -71,9 +71,7 @@
                 <div class="rectangle"> <img id="waiting9" class="imgfit" src="images/waitingIcon.png" style="width:120%; height:120%"> </div>
                 <div class="rectangle"> <img id="waiting10" class="imgfit" src="images/waitingIcon.png" style="width:120%; height:120%"> </div>
             </div>
-            <div class="col-md-6">
-                <?php include('textchat.php'); ?>
-            </div>
+            <div class="col-md-6"><?php include('textchat.php'); ?></div>
         </div>
     </body>
 </html>
