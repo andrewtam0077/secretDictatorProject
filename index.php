@@ -56,7 +56,6 @@
                     <br/>
                     <input class="logininput" type="password" placeholder="password" name="pwd" required>
                     <button type="submit" id="loginButton" class="btn btn-default btn-light btn-block" style="width:75%">Login</button>    
-                    <B class="important_txt" style="color: rgb(218, 44, 44); font-size: 1.2rem; text-shadow: 2px 2px 2px #000000;" id="ErrorMes"></B>
                 </form>
             </div>
         <?php } ?>
@@ -84,6 +83,16 @@
                     <button class="btn btn-default d-flex justify-content-center" style="text-align: center;">
                         <img id="joinGame" class="imgfit" src="images/joinGame.png" style="width:100%; height:100%">
                     </button>
+                    <div id="joinform" class="d-flex justify-content-center text-center hide" style="background-color: white; border-radius: 10px; height: 70%; width: 70%; transform: rotate(6deg); padding: 2%;">
+                        <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+                            <p style="font-weight: bold; font-size: 0.8rem; line-height: 0px; padding-top: 4%">Enter the Group Code</p>
+                            <input type="text" name="joinGroupCode" placeholder="ex. 'ABCD'" style="width: 100%; font-size: 0.8rem;">
+                            <div class="btn-group">
+                                <input class="btn btn-secondary btn-sm" id="cancelJoin" value="cancel" style="width: 30%; height: 4vh; border-radius: 4px;">
+                                <input class="btn btn-primary btn-sm" id="submitJoin" value="join" style="width: 30%; height: 4vh;">
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="col-md-2 col-sm-2">
                 </div>
@@ -115,15 +124,9 @@
 
         
         <script>
-            let error;
-            error = () => {
-                document.getElementById("ErrorMes").innerHTML = "Error, Unsuccessful Login.";
-            }
-            document.getElementById("loginButton").addEventListener("click", error);
             //arrow function to output error since login hasn't been incoporated
             //make buttons go to destination when clicked 
             document.getElementById("hostGame").addEventListener("click", function() {goLobby();}, false);
-            document.getElementById("joinGame").addEventListener("click", function() {goLobby();}, false);
             //make buttons expand when hovered over
             var growth = 1.05;
             document.getElementById("hostGame").addEventListener("mouseover", function() {grow("hostGame", growth);}, false);
@@ -141,6 +144,11 @@
             document.getElementById("close_ins").addEventListener("click", function () {hide("instructions");}, false);
             document.getElementById("aboutUs").addEventListener("click", function () {show("aboutInfo");}, false);
             document.getElementById("close_about").addEventListener("click", function () {hide("aboutInfo");}, false);
+
+            document.getElementById("joinGame").addEventListener("click", function () {makeVisible("joinform");}, false);
+            document.getElementById("joinGame").addEventListener("click", function () {hide("joinGame");}, false);
+            document.getElementById("cancelJoin").addEventListener("click", function () {show("joinGame");}, false);
+            document.getElementById("cancelJoin").addEventListener("click", function () {makeInvisible("joinform");}, false);
         </script>
     </body>
 </html>
