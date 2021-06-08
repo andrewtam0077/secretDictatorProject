@@ -88,10 +88,30 @@
                             <p style="font-weight: bold; font-size: 0.8rem; line-height: 0px; padding-top: 4%">Enter the Group Code</p>
                             <input type="text" name="joinGroupCode" placeholder="ex. 'ABCD'" style="width: 100%; font-size: 0.8rem;">
                             <div class="btn-group">
-                                <input class="btn btn-secondary btn-sm" id="cancelJoin" value="cancel" style="width: 30%; height: 4vh; border-radius: 4px;">
-                                <input class="btn btn-primary btn-sm" id="submitJoin" value="join" style="width: 30%; height: 4vh;">
+                                <input class="btn btn-secondary btn-sm" id="cancelJoin" value="cancel" style="width: 30%; height: 4vh;">
+                                <input type="submit" class="btn btn-primary btn-sm" id="submitJoin" value="join" style="width: 30%; height: 4vh;">
                             </div>
                         </form>
+                        <?php 
+                            if($_SERVER['REQUEST_METHOD'] == "POST") {
+                                if(isset($_POST['joinGroupCode']) {
+                                    $errMsg = "";
+                                    $code = $_POST['joinGroupCode'];
+                                    if(strlen($code) != 4) {
+                                        $errMsg = "Group Code must have 4 Letters"
+                                    } //Then test if it can find an existing game with the given group code in an else if statement
+
+                                    if($errMsg == "") {
+                                        setcookie('groupCode', $_POST['joinGroupCode'], time()+3600); //expire in 1 hour
+                                        header('Location: lobby.php');
+                                    } else { ?>
+                                        <i style="color: red; text-shadow: 1px 1px 3px black; font-size: 1.5rem;">
+                                            <?php echo $errMsg ?>
+                                        </i>
+                                    <?php }
+                                }
+                                }
+                        ?>
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-2">
