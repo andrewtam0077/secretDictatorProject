@@ -14,7 +14,6 @@
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <script src="js/buttons.js"></script>
         <script src="js/fitPlayers.js"></script>
-
         <!-- Document Styling -->
         <style>
             .rectangle {
@@ -40,7 +39,6 @@
         <div class="row">
             <div class="col-md-2" style="color:black;font-size:150%;text-align:left;"><B>Group Code: </B></div>
             <div class="col-md-2" style="color:white;font-size:200%;text-align:left;"><B>2342 </B></div>
-
             <div class="col-md-4" style="color:black;font-size:300%;text-align:center;"> <B>Lobby</B> </div> 
             <!-- join game button -->
             <div class="col-md-2"> 
@@ -74,34 +72,7 @@
                 <div class="rectangle"> <img id="waiting10" class="imgfit" src="images/waitingIcon.png" style="width:120%; height:120%"> </div>
             </div>
             <div class="col-md-6">
-                <!-- <div class="rectangle" style="position:relative; left: 20px; top: 50px; width:100%; height:50%; background-color: coral; float: right;">
-                    <div class="col-md-12 col-md-offset-4" id="chatbox">
-                        <h2 style="text-align: center;">Messages</h2>
-                            <form class="form-container" style="position: relative; left: 50px">
-                                <textarea type="text" placeholder="Type text... " name="msg" required="" style="height:200px;width:350px; background-color: white;"></textarea>
-                                <br/>
-                                <button type="submit" class="btn btn-info btn-sm btn-send">Send</button>
-                            </form>
-                    </div>
-                </div> -->
-                <div class="fitImg" style="width: 100%; height: 100%; background-position: bottom 0 right 0; background-size: auto 100%; background-image: url('images/textChat.png')">
-                    <h1 style="margin-left: 55%; padding-top: 3%" >Text Chat</h1>
-                    <div style="margin: 0 5% 5% 37%; padding-top: 5%; height: 57%">
-                        <table id="textchat" class="mt-auto">
-                            <thead>
-                            </thead>                    
-                        </table>
-                    </div>
-                    <div style="margin: 0 5% 5% 37%;">
-                        <form name="textform">
-                            <div class="form-group">
-                                <textarea id="sendtext" class="form-control" rows="2" cols="40" placeholder = "type here..." style="border-radius: 7px;"></textarea>
-                            </div>
-                            <input type="button" class="btn btn-dark btn-block" id="add" value="Send" onclick="sendText('You')"/> 
-                            <span class="error" id="text_errmsg" style="color: red;"></span>
-                        </form> 
-                    </div>
-                </div>
+                <?php include('textchat.php'); ?>
             </div>
         </div>
     </body>
