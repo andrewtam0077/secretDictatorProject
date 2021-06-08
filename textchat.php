@@ -1,9 +1,3 @@
-<?php
-    //create a server side session
-    if(!isset($_COOKIE['textlist'])) {
-        setcookie('textlist', json_encode("Hello" => "this is text chat"), time()+3600);
-    }
-?>
 <div class="fitImg" style="width: 100%; height: 100%;
                             background-position: top 0 left 0; 
                             background-size: auto 100%; background-image: url('images/textChat.png')">
@@ -20,13 +14,13 @@
         ?>
     </div>
     <div style="margin: 0 5% 5% 25%;">
-        <form name="textform" action="<?php $_SERVER['PHP_SELF']?>" method="get">
-            <div class="form-group">
-                <textarea id="sendtext" class="form-control" rows="2" cols="40" placeholder = "type here..." style="border-radius: 7px;"></textarea>
-            </div>
+        <form action="lobby.php" method="get">
+            <textarea name="sendtext" class="form-control" rows="2" cols="40" placeholder = "type here..." style="border-radius: 7px;"></textarea>
             <input type="button" class="btn btn-dark btn-block" id="add" value="Send"/>
         </form> 
         <?php 
+            echo $_SERVER['PHP_SELF'];
+            echo isset($_GET['sendtext']);
             //These should be creating and modifying server sessions NOT COOKIES
             if($_SERVER['REQUEST_METHOD'] == "GET") {
                 $text_errMsg = "";
@@ -34,10 +28,8 @@
                     if(strlen($_GET['sendtext']) > 280) {
                         $text_errMsg = "Message is too long to send";
                     }
-                } else {
-                    $text_errMsg = "Enter text to send a message";
                 }
-                if($text_errMsg == "") {
+                if($text_errMsg == "" && isset($_GET['sendtext'])) {
                     $textlist = json_decode($_COOKIE['textlist']);
                     array_push($textlist, array("You" => $_GET['sendtext']));
                     setcookie('textlist', json_encode($textlist), time()+3600);
