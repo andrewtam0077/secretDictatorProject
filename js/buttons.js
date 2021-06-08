@@ -18,6 +18,13 @@ function hide(id) {
 function show(id) {
     document.getElementById(id).style.display = "block";
 }
+function makeInvisible(id) {
+    document.getElementById(id).style.visibility = "hidden";
+}
+function makeVisible(id) {
+    document.getElementById(id).style.visibility = "visible";
+}
+
 function goHome() {
     if(confirm("Are you sure you want to leave?") == true) {
         location.href = "index.html";
