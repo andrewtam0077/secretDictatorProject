@@ -32,12 +32,22 @@
     <body>
         <!-- Envelope and Username -->
         <img class = "absolutepos envelope_group" src="images/envelope.png" style="height:100%; top: 0; left: 0; z-index: -1;">
-        <p class="absolutepos important_txt envelope_tilt envelope_group" style="top: 20%; left: 2%;">
-            <B>Welcome, Please Sign In</B>
-        </p>
         <!-- Added the username,password inputs and submit login button -->
         <!-- need to incorporate POST -->
-        <p class="absolutepos important_txt envelope_tilt envelope_group" style="top: 30%; left: 1.5%;">
+        <div class="absolutepos important_txt envelope_tilt envelope_group" style="top: 20%; left: 4%; width: 30%;">
+            <B>Please Sign In</B>
+
+            <!-- Added the username,password inputs and submit login button -->
+            <!-- need to incorporate POST -->
+            <form class="important_txt" style="width: 90%; padding: 10% 0 0%" method="post">
+                <input class="logininput" type="username" placeholder="username" name="username" required>
+                <br/>
+                <input class="logininput" type="password" placeholder="password" name="pwd" required>
+                <button type="submit" id="loginButton" class="btn btn-default btn-light btn-block" style="width:75%">Login</button>    
+                <B class="important_txt" style="color: rgb(218, 44, 44); font-size: 1.2rem; text-shadow: 2px 2px 2px #000000;" id="ErrorMes"></B>
+            </form>
+        </div>
+        <!-- <p class="absolutepos important_txt envelope_tilt envelope_group" style="top: 30%; left: 1.5%;">
                 <input class="logininput" type="username" placeholder="Enter Username" name="user" required>
                 <br/>
                 <input class="logininput" type="password" placeholder="Enter password" name="pwd" required>
@@ -45,7 +55,7 @@
                 <button type="submit" id="loginButton" class="btn btn-default btn-light btn-block" style="width:75%">Login</button>    
                 <br/>  
                 <p class="absolutepos important_txt envelope_tilt envelope_group" style="top:50%; left: 1.5%;color: black;font-size: small;" id="ErrorMes"><B></B></p>
-        </p>
+        </p> -->
 
         
 
