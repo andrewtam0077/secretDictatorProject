@@ -10,7 +10,7 @@
 <body>
   
   <?php
-  if(count$_COOKIE) > 0) {
+  if(count($_COOKIE) > 0) {
     foreach ($_COOKIE as $key => $val) {
       unset($_COOKIE[$key]);  //only removes from server side cookies
       setcookie($key, '', time()-3600); //permanently remove from client (make it expire in the past

@@ -51,16 +51,33 @@
 
                 <!-- Added the username,password inputs and submit login button -->
                 <!-- need to incorporate POST -->
-                <form class="important_txt" style="width: 90%; padding: 10% 0 0%" method="post">
-                    <input class="logininput" type="username" placeholder="username" name="username" required>
+                <form class="important_txt" style="width: 90%; padding: 10% 0 0%" method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
+                    Username: <input class="form-control" type="username" placeholder="username" name="username" required>
                     <br/>
-                    <input class="logininput" type="password" placeholder="password" name="pwd" required>
+                    Password: <input class="form-control" type="password" placeholder="password" name="pwd" required>
                     <button type="submit" id="loginButton" class="btn btn-default btn-light btn-block" style="width:75%">Login</button>    
                     <B class="important_txt" style="color: rgb(218, 44, 44); font-size: 1.2rem; text-shadow: 2px 2px 2px #000000;" id="ErrorMes"></B>
                 </form>
             </div>
         <?php } ?>
+        <?php 
+            //when form is submitted
+            if($_SERVER['REQUEST_METHOD'] == "POST") {
+                //run authentication
+                if(isset($_POST['username']) && isset($_POST['pwd'])) {
+                    $user = $_POST['username'];
+                    $pwd = $_POST['pwd'];
+                    //save cookie function: (name, value, expire)
+                    //time() is based on servertime
+                    setcookie('user', $user, time()+3600); //expire in 1 hour
+                    //don't want to save password in cookie
+                    setcookie('pwd', password_hash($pwd, PASSWORD_DEFAULT), time()+3600); //for demonstration purposes
+                    header("Location: lobby.html");
+
+                }
+            }
         
+        ?>
 
         <div class="container">
             <!-- Title Logo -->
