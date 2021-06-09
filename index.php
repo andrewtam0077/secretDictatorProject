@@ -1,3 +1,7 @@
+<?php 
+    require("connectDB.php");
+    global $db;
+?>
 <html lang-eng>
     <head>
         <!-- Meta data -->
@@ -33,16 +37,18 @@
         <!-- Envelope and Username -->
         <img class = "absolutepos envelope_group" src="images/envelope.png" style="height:100%; top: 0; left: 0; z-index: -1;">
         
-        <?php 
-            if(isset($_COOKIE['username'])) { ?>
+        <?php
+            session_start();   
+            $message = '';
+            if(isset($_SESSION['user_id'])) { ?>
                 <div class="absolutepos important_txt envelope_tilt envelope_group" style="top: 28%; left: 5.5%; z-index: 0;">
                     <div style="padding: 0; margin: 0;">
                         <B style="padding: 0; margin: 0; line-height: 100%;">Welcome</B>
                     </div>
                     <div style="padding: 0; margin: 0;">
-                        <B style="padding: 0; margin: 0; line-height: 100%; color: var(--darkred);"><?php echo $_COOKIE['username'] ?></B>
+                        <B style="padding: 0; margin: 0; line-height: 100%; color: var(--darkred);"><?php echo $_SESSION['user_id'] ?></B>
                     </div>
-                    <buton type="submit" id="logout-btn" class="btn btn-outline-dark btn-block" style="width:50%; margin-top: 10%;">logout</button>
+                    <button type="submit" id="logout-btn" class="btn btn-outline-dark btn-block" style="width:50%; margin-top: 10%;">logout</button>
                 </div>
         <?php } else {
         ?>
@@ -52,30 +58,67 @@
                 <!-- Added the username,password inputs and submit login button -->
                 <!-- need to incorporate POST -->
                 <form class="important_txt" style="width: 90%; padding: 10% 0 0%" method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
-                    <input class="logininput" type="username" placeholder="username" name="username" required>
+                    <input class="logininput" type="username" placeholder="username" name="user_id" required>
                     <br/>
-                    <input class="logininput" type="password" placeholder="password" name="pwd" required>
-                    <button type="submit" id="loginButton" class="btn btn-default btn-light btn-block" style="width:75%">Login</button>    
+                    <input class="logininput" type="password" placeholder="password" name="password" required>
+                    <button type="submit" id="loginButton" class="btn btn-default btn-light btn-block" style="width:75%">Login</button>  
+                    <button type="submit" id="registerButton" class="btn btn-default btn-light btn-block" style="width:75%" onclick="window.location.href='register.php';">Register</button>
+
+                    <label class="text-danger" name="errmes"> <?php echo $message; ?> </label>  
                 </form>
             </div>
         <?php } ?>
         <?php 
             //when form is submitted
+            $user_id = $password = "";
             if($_SERVER['REQUEST_METHOD'] == "POST") {
                 //run authentication
-                if(isset($_POST['username']) && isset($_POST['pwd'])) {
-                    $user = $_POST['username'];
-                    $pwd = $_POST['pwd'];
+                if(isset($_POST['user_id']) && isset($_POST['password'])) {
+                    $user_id = $_POST['user_id'];
+                    $password = $_POST['password'];
+                    $query = "SELECT * FROM player WHERE user_id = '$user_id' and password = '$password'";
+                    //insert data to the database
+                    $query = "INSERT INTO player (user_id, password) VALUES ('$user_id', '$password')";
+                    // $db->query($query);
+                    $statement = $db->prepare($query);
+                    $statement->execute([
+                        ':user_id' => $user_id,
+                        ':password' => $password
+                    ]);
+                    // $statement->execute(
+                    //     array(
+                    //         'user_id' => $_POST['user_id'],
+                    //         'password' => $_POST['password']
+                    // //     )
+                    // // );
+                    // //$count = $statement->rowCount();
+                    // if($count > 0) {
+                    //     $_SESSION["user_id"] = $_POST["user_id"];
+                    //     header("refresh:2; url=index.php");
+                    // }
+                    // else {
+                    //     $message = "incorrect username or password";
+                    // }
+
                     //save cookie function: (name, value, expire)
                     //time() is based on servertime
-                    setcookie('username', $user, time()+3600); //expire in 1 hour
+                    // setcookie('user_id', $user_id, time()+3600); //expire in 1 hour
                     //don't want to save password in cookie
-                    setcookie('pwd', password_hash($pwd, PASSWORD_DEFAULT), time()+3600); //for demonstration purposes
+                    // setcookie('password', password_hash($password, PASSWORD_DEFAULT), time()+3600); //for demonstration purposes
                 }
             }
+            
+            
+            
+           
+            // if($statement->execute()) {
+            //     if($statement->rowCount()==1) {
+            //         $_SESSION["user_id"] = $user_id;
+            //     }
+            // }
+            
         
         ?>
-
         <div class="container">
             <!-- Title Logo -->
             <div class="row">
