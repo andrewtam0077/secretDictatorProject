@@ -3,8 +3,19 @@
     if(!isset($_COOKIE['username'])) {
         header('index.php');
     }
-    if(!isset($_COOKIE['textlist'])) {
-        setcookie('textlist', json_encode(array("Hello" => "Texts will show here", You" => "[joined the lobby]")), time()+3600);
+    if(!isset($_COOKIE['textlist']) || $_COOKIE['textlist'] == null) {
+        setcookie('textlist', json_encode(array()), time()+3600);
+    }
+    $text_errMsg = "";
+    if($_SERVER['REQUEST_METHOD'] == "GET") {
+        if(!isset($_COOKIE['textlist']) || json_decode($_COOKIE['textlist']) == null) {
+            setcookie('textlist', json_encode(array()), time()+3600);
+        }
+        if(isset($_GET['sendtext']) && $_GET['sendtext'] != null) {
+            $textlist = json_decode($_COOKIE['textlist'], true);
+            array_push($textlist, array("You-" . $_GET['sendtext']));
+            setcookie('textlist', json_encode($textlist), time()+3600);
+        }
     }
 ?>
 <html lang-eng>
@@ -47,7 +58,7 @@
         <!-- header row -->
         <div class="row">
             <div class="col-md-2" style="color:black;font-size:150%;text-align:left;"><B>Group Code: </B></div>
-            <div class="col-md-2" style="color:white;font-size:200%;text-align:left;"><B>2342 </B></div>
+            <div class="col-md-2" style="color:white;font-size:200%;text-align:left;"><B>ABCD</B></div>
             <div class="col-md-4" style="color:black;font-size:300%;text-align:center;"> <B>Lobby</B> </div>
             <!-- join game button -->
             <div class="col-md-2"> 
