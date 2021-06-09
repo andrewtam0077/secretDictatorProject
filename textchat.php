@@ -13,31 +13,33 @@
             }
         ?>
     </div>
+    <?php
+        $textToSend = '';
+        if(isset($_GET['sendtext'])) {
+            $textToSend = htmlspecialchars($_GET['sendtext']);
+        }
+    ?>
     <div style="margin: 0 5% 5% 25%;">
-        <form action="lobby.php" method="get">
-            <textarea name="sendtext" class="form-control" rows="2" cols="40" placeholder = "type here..." style="border-radius: 7px;"></textarea>
-            <input type="button" class="btn btn-dark btn-block" id="add" value="Send"/>
-        </form> 
-        <?php 
-            echo $_SERVER['PHP_SELF'];
-            echo isset($_GET['sendtext']);
-            //These should be creating and modifying server sessions NOT COOKIES
-            if($_SERVER['REQUEST_METHOD'] == "GET") {
-                $text_errMsg = "";
-                if(isset($_GET['sendtext'])) {
-                    if(strlen($_GET['sendtext']) > 280) {
-                        $text_errMsg = "Message is too long to send";
+        <form id="textform" action="<?php $_SERVER['PHP_SELF'] ?>" method="GET">
+            <textarea name="sendtext" id="textsend" class="form-control" rows="2" cols="40" placeholder = "type here..." style="border-radius: 7px;"></textarea>
+            <input type="button" name="submit" class="btn btn-dark btn-block" id="add" value="Send"/>
+            <?php
+                //These should be creating and modifying server sessions NOT COOKIES
+                if($_SERVER['REQUEST_METHOD'] == "GET") {
+                    $text_errMsg = '';
+                    if($textToSend > 280) {
+                        $text_errMsg = 'Message is too long to send';
+                    }
+                    if($text_errMsg == '' && $textToSend != '')) {
+                        $textlist = json_decode($_COOKIE['textlist']);
+                        array_push($textlist, array("You" => $textToSend);
+                        setcookie('textlist', json_encode($textlist), time()+3600);
+                    } else { 
+                        $dud = 0;
+                        ?><span class="error" id="text_errmsg" style="color: red;"> <?php echo $text_errMsg ?></span><?php
                     }
                 }
-                if($text_errMsg == "" && isset($_GET['sendtext'])) {
-                    $textlist = json_decode($_COOKIE['textlist']);
-                    array_push($textlist, array("You" => $_GET['sendtext']));
-                    setcookie('textlist', json_encode($textlist), time()+3600);
-                } else { 
-                    $dud = 0;
-                    ?><span class="error" id="text_errmsg" style="color: red;"> <?php echo $text_errMsg ?></span><?php
-                }
-            }
-        ?>
+            ?>
+        </form> 
     </div>
 </div>
