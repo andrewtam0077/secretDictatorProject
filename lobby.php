@@ -1,3 +1,12 @@
+<?php
+    //create a server side session
+    if(!isset($_COOKIE['username'])) {
+        header('index.php');
+    }
+    if(!isset($_COOKIE['textlist'])) {
+        setcookie('textlist', json_encode(array("Hello" => "Texts will show here", You" => "[joined the lobby]")), time()+3600);
+    }
+?>
 <html lang-eng>
     <head>
         <!-- Meta data -->

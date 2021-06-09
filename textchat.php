@@ -17,11 +17,12 @@
         $textToSend = '';
         if(isset($_GET['sendtext'])) {
             $textToSend = htmlspecialchars($_GET['sendtext']);
+            echo $textToSend;
         }
     ?>
     <div style="margin: 0 5% 5% 25%;">
         <form id="textform" action="<?php $_SERVER['PHP_SELF'] ?>" method="GET">
-            <textarea name="sendtext" id="textsend" class="form-control" rows="2" cols="40" placeholder = "type here..." style="border-radius: 7px;"></textarea>
+            <input type="text" name="sendtext" class="form-control" placeholder = "type here..." style="border-radius: 7px;">
             <input type="button" name="submit" class="btn btn-dark btn-block" id="add" value="Send"/>
             <?php
                 //These should be creating and modifying server sessions NOT COOKIES
@@ -30,9 +31,9 @@
                     if($textToSend > 280) {
                         $text_errMsg = 'Message is too long to send';
                     }
-                    if($text_errMsg == '' && $textToSend != '')) {
+                    if($text_errMsg == '' && $textToSend != '') {
                         $textlist = json_decode($_COOKIE['textlist']);
-                        array_push($textlist, array("You" => $textToSend);
+                        array_push($textlist, array("You" => $textToSend));
                         setcookie('textlist', json_encode($textlist), time()+3600);
                     } else { 
                         $dud = 0;
