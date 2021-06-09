@@ -43,6 +43,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col"><input type="text" class="form-control" name="user_id" placeholder="username" required="required"></div>
+                        <div class="col"><input type="text" class="form-control" name="nickname" placeholder="Nickname"></div>
                     </div>        	
                 </div>       
                 <div class="form-group">
@@ -52,48 +53,52 @@
                     <input type="submit" name="btn_register" class="btn btn-success" value="Register">
                 </div>
                 <div class="text-center">Already have an account? <a href="index.php">Sign in</a></div>
-                <div class="alert alert-danger"><?php echo $errMes; ?></div>
-            </form>
-            <?php 
-            $user_id = $password = ""; //default
-            if($_SERVER['REQUEST_METHOD'] == "POST") {
-                if(isset($_POST['user_id']) && isset($_POST['password'])) {
-                    $user_id = $_POST['user_id'];
-                    $password = $_POST['password'];
-                    
-                    if(empty($user_id) && empty($password)) {
-                        $errMes = "Please enter a username and password";
-                    }
-                    if(empty($user_id)) {
-                        $errMes = "Please enter a username";
-                    }
-                    else if(empty($password)) {
-                        $errMes = "Please enter a password";
-                    }
-                    else {
-                        $query = $db->prepare("SELECT * FROM player WHERE user_id=:user_id");
-                        $query->bindParam(":user_id",$user_id);
-                        $query->bindParam(":password",$password);
-                        $row=$query->fetch(PDO::FETCH_ASSOC);
-                        echo $row["user_id"];
-                        #echo $user_id;
-                        if($user_id==$row["user_id"]) {
-                            
-                            $errMes = "this username already exists";
+                <?php 
+                $user_id = $password; //default
+                $nickname = "guest";
+                if($_SERVER['REQUEST_METHOD'] == "POST") {
+                    if(isset($_POST['user_id']) && isset($_POST['password'])) {
+                        $user_id = $_POST['user_id'];
+                        $password = $_POST['password'];
+                        $nickname = $_POST['nickname'];
+                        if(empty($user_id) && empty($password)) {
+                            $errMes = "Please enter a username and password";
+                        }
+                        if(empty($user_id)) {
+                            $errMes = "Please enter a username";
+                        }
+                        else if(empty($password)) {
+                            $errMes = "Please enter a password";
                         }
                         else {
-                            $query = "INSERT INTO player (user_id, password) values ('$user_id', '$password')";
+                            $query = "SELECT * FROM player WHERE user_id = '$user_id'"; 
+                            $db->prepare($query);
                             $statement = $db->prepare($query);
                             $statement->execute([
                                 ':user_id' => $user_id,
                                 ':password' => $password
                             ]);
-                            //header("Location: index.php");
+                            $count = $statement->fetch(PDO::FETCH_ASSOC);
+                            if($user_id==$count["user_id"]) {
+                                $errMes = "this username already exists";
+                            }
+                            else {
+                                $query = "INSERT INTO player (user_id, password, nickname) values ('$user_id', '$password', '$nickname')";
+                                $statement = $db->prepare($query);
+                                $statement->execute([
+                                    ':user_id' => $user_id,
+                                    ':password' => $password,
+                                    ':nickname' => $nickname
+                                ]);
+                                header("Location: index.php");
+                            }
                         }
                     }
                 }
-            }
-            ?>
+                ?>
+                <div class="alert alert-danger"><?php echo $errMes; ?></div>
+            </form>
+            
         </div>
     </body>
 </html> 

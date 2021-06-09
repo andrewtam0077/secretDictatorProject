@@ -1,6 +1,7 @@
 <?php 
     require("connectDB.php");
     global $db;
+    $message = '';
 ?>
 <html lang-eng>
     <head>
@@ -39,7 +40,6 @@
         
         <?php
             session_start();   
-            $message = '';
             if(isset($_SESSION['user_id'])) { ?>
                 <div class="absolutepos important_txt envelope_tilt envelope_group" style="top: 28%; left: 5.5%; z-index: 0;">
                     <div style="padding: 0; margin: 0;">
@@ -48,7 +48,8 @@
                     <div style="padding: 0; margin: 0;">
                         <B style="padding: 0; margin: 0; line-height: 100%; color: var(--darkred);"><?php echo $_SESSION['user_id'] ?></B>
                     </div>
-                    <button type="submit" id="logout-btn" class="btn btn-outline-dark btn-block" style="width:50%; margin-top: 10%;">logout</button>
+                    <button type="submit" id="updateButton" class="btn btn-outline-dark btn-block" style="width:75%; margin-top: 10%;" onclick="window.location.href='update.php';">Update Nickname</button>
+                    <button type="submit" id="logout-btn" class="btn btn-outline-dark btn-block" style="width:75%; margin-top: 10%;" onclick="window.location.href='logout.php';">logout</button>
                 </div>
         <?php } else {
         ?>
@@ -63,62 +64,42 @@
                     <input class="logininput" type="password" placeholder="password" name="password" required>
                     <button type="submit" id="loginButton" class="btn btn-default btn-light btn-block" style="width:75%">Login</button>  
                     <button type="submit" id="registerButton" class="btn btn-default btn-light btn-block" style="width:75%" onclick="window.location.href='register.php';">Register</button>
+                    <?php 
+                    //when form is submitted
+                    $user_id = $password = "";
+                    if($_SERVER['REQUEST_METHOD'] == "POST") {
+                        //run authentication
+                        if(isset($_POST['user_id']) && isset($_POST['password'])) {
+                            $user_id = $_POST['user_id'];
+                            $password = $_POST['password'];
+                            $query = "SELECT * FROM player WHERE user_id = '$user_id' and password = '$password'";
+                            $statement = $db->prepare($query);
+                            $statement->execute([
+                                ':user_id' => $user_id,
+                                ':password' => $password
+                            ]);
+                            $count = $statement->rowCount();
+                            if($count > 0) {
+                                $_SESSION["user_id"] = $_POST["user_id"];
+                                $message = '';
+                                header("refresh:1; url=index.php");
+                            }
+                            else {
+                                $message = "incorrect username or password";
+                            }
+                        }
+                        else {
+                            $message = '';
+                        }
+                    }
 
-                    <label class="text-danger" name="errmes"> <?php echo $message; ?> </label>  
+                
+                ?>
+                <label class="text-danger" name="errmes"> <?php echo $message; ?> </label>  
                 </form>
             </div>
         <?php } ?>
-        <?php 
-            //when form is submitted
-            $user_id = $password = "";
-            if($_SERVER['REQUEST_METHOD'] == "POST") {
-                //run authentication
-                if(isset($_POST['user_id']) && isset($_POST['password'])) {
-                    $user_id = $_POST['user_id'];
-                    $password = $_POST['password'];
-                    $query = "SELECT * FROM player WHERE user_id = '$user_id' and password = '$password'";
-                    //insert data to the database
-                    $query = "INSERT INTO player (user_id, password) VALUES ('$user_id', '$password')";
-                    // $db->query($query);
-                    $statement = $db->prepare($query);
-                    $statement->execute([
-                        ':user_id' => $user_id,
-                        ':password' => $password
-                    ]);
-                    // $statement->execute(
-                    //     array(
-                    //         'user_id' => $_POST['user_id'],
-                    //         'password' => $_POST['password']
-                    // //     )
-                    // // );
-                    // //$count = $statement->rowCount();
-                    // if($count > 0) {
-                    //     $_SESSION["user_id"] = $_POST["user_id"];
-                    //     header("refresh:2; url=index.php");
-                    // }
-                    // else {
-                    //     $message = "incorrect username or password";
-                    // }
-
-                    //save cookie function: (name, value, expire)
-                    //time() is based on servertime
-                    // setcookie('user_id', $user_id, time()+3600); //expire in 1 hour
-                    //don't want to save password in cookie
-                    // setcookie('password', password_hash($password, PASSWORD_DEFAULT), time()+3600); //for demonstration purposes
-                }
-            }
-            
-            
-            
-           
-            // if($statement->execute()) {
-            //     if($statement->rowCount()==1) {
-            //         $_SESSION["user_id"] = $user_id;
-            //     }
-            // }
-            
         
-        ?>
         <div class="container">
             <!-- Title Logo -->
             <div class="row">

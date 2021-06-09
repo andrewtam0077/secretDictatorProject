@@ -11,7 +11,7 @@
                     $msg = $dataexp[1];
                     if(isset($user) && isset($msg) && $msg != null) {
                         $color = 'color: black;';
-                        if($user == $_COOKIE['username'] || $user == "You") {
+                        if($user == "You") {
                             $color = 'color: var(--darkred)';
                         }
                         ?><p style="line-height: 9px; <?php echo $color; ?>"> <?php echo $user . ": " . $msg; ?></p><?php
